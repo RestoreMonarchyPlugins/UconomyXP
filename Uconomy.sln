@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uconomy", "Uconomy.csproj", "{602882B6-F16C-4247-9F5D-21846BC4C09A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UconomyToExperience", "Uconomy\UconomyToExperience.csproj", "{602882B6-F16C-4247-9F5D-21846BC4C09A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,5 +21,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {050EBAC2-512F-4A11-B51F-72E292A8AAC6}
 	EndGlobalSection
 EndGlobal

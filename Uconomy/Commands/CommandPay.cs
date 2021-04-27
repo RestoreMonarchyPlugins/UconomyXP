@@ -5,7 +5,7 @@ using Rocket.Unturned.Player;
 using System;
 using System.Collections.Generic;
 
-namespace fr34kyn01535.Uconomy
+namespace fr34kyn01535.Uconomy.Commands
 {
     public class CommandPay : IRocketCommand
     {

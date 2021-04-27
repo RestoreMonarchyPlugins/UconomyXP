@@ -1,11 +1,10 @@
-﻿using Rocket;
+﻿using fr34kyn01535.Uconomy.Models;
 using Rocket.API.Collections;
+using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
 using Rocket.Unturned;
-using Rocket.Unturned.Events;
 using Rocket.Unturned.Player;
-using Rocket.Unturned.Plugins;
-using SDG;
+using SDG.Unturned;
 using Steamworks;
 using System;
 
@@ -19,8 +18,22 @@ namespace fr34kyn01535.Uconomy
         protected override void Load()
         {
             Instance = this;
-            Database = new DatabaseManager();
-            U.Events.OnPlayerConnected+=Events_OnPlayerConnected;
+            Database = new DatabaseManager(Directory, "balances.json");
+            Database.LoadData();
+            U.Events.OnPlayerConnected += Events_OnPlayerConnected;
+            SaveManager.onPostSave += Database.SaveData;
+            PlayerSkills.OnExperienceChanged_Global += OnExperienceChanged;
+
+            Logger.Log($"{Name} {Assembly.GetName().Version} has been loaded!", ConsoleColor.Yellow);
+        }
+
+        protected override void Unload()
+        {
+            U.Events.OnPlayerConnected -= Events_OnPlayerConnected;
+            SaveManager.onPostSave -= Database.SaveData;
+            PlayerSkills.OnExperienceChanged_Global -= OnExperienceChanged;
+
+            Logger.Log($"{Name} has been unloaded!", ConsoleColor.Yellow);
         }
 
         public delegate void PlayerBalanceUpdate(UnturnedPlayer player, decimal amt);
@@ -35,15 +48,15 @@ namespace fr34kyn01535.Uconomy
             get
             {
                 return new TranslationList(){
-                {"command_balance_show","Your current balance is: {0} {1}"},
-                {"command_pay_invalid","Invalid arguments"},
-                {"command_pay_error_pay_self","You cant pay yourself"},
-                {"command_pay_error_invalid_amount","Invalid amount"},
-                {"command_pay_error_cant_afford","Your balance does not allow this payment"},
-                {"command_pay_error_player_not_found","Failed to find player"},
-                {"command_pay_private","You paid {0} {1} {2}"},
-                {"command_pay_console","You received a payment of {0} {1} "},
-                {"command_pay_other_private","You received a payment of {0} {1} from {2}"},
+                    {"command_balance_show","Your current balance is: {0} {1}"},
+                    {"command_pay_invalid","Invalid arguments"},
+                    {"command_pay_error_pay_self","You cant pay yourself"},
+                    {"command_pay_error_invalid_amount","Invalid amount"},
+                    {"command_pay_error_cant_afford","Your balance does not allow this payment"},
+                    {"command_pay_error_player_not_found","Failed to find player"},
+                    {"command_pay_private","You paid {0} {1} {2}"},
+                    {"command_pay_console","You received a payment of {0} {1} "},
+                    {"command_pay_other_private","You received a payment of {0} {1} from {2}"},
                 }; 
             }
         }
@@ -74,8 +87,18 @@ namespace fr34kyn01535.Uconomy
 
         private void Events_OnPlayerConnected(UnturnedPlayer player)
         {
-           //setup account
+            //setup account
             Database.CheckSetupAccount(player.CSteamID);
+        }
+
+        private void OnExperienceChanged(PlayerSkills arg1, uint arg2)
+        {
+            PlayerBalance bal = Database.GetPlayerBalance(arg1.channel.owner.playerID.steamID.ToString());
+
+            if (bal.Balance == arg1.experience)
+                return;
+
+            bal.SetBalance(arg1.experience);
         }
     }
 }
