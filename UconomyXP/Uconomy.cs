@@ -24,7 +24,7 @@ namespace fr34kyn01535.Uconomy
             SaveManager.onPostSave += Database.SaveData;
             PlayerSkills.OnExperienceChanged_Global += OnExperienceChanged;
 
-            Logger.Log($"{Name} {Assembly.GetName().Version} has been loaded!", ConsoleColor.Yellow);
+            Logger.Log($"UconomyXP {Assembly.GetName().Version} has been loaded!", ConsoleColor.Yellow);
         }
 
         protected override void Unload()
