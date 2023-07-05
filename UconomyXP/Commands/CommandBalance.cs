@@ -34,7 +34,7 @@ namespace fr34kyn01535.Uconomy.Commands
 
         public List<string> Aliases
         {
-            get { return new List<string> { "saldo" }; }
+            get { return new List<string> { "saldo", "bal" }; }
         }
 
         public List<string> Permissions

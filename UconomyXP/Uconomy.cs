@@ -15,6 +15,8 @@ namespace fr34kyn01535.Uconomy
         public DatabaseManager Database;
         public static Uconomy Instance;
 
+        public const string Version = "1.4.0";
+
         protected override void Load()
         {
             Instance = this;
@@ -24,7 +26,7 @@ namespace fr34kyn01535.Uconomy
             SaveManager.onPostSave += Database.SaveData;
             PlayerSkills.OnExperienceChanged_Global += OnExperienceChanged;
 
-            Logger.Log($"UconomyXP {Assembly.GetName().Version} has been loaded!", ConsoleColor.Yellow);
+            Logger.Log($"UconomyXP {Version} has been loaded!", ConsoleColor.Yellow);
         }
 
         protected override void Unload()
@@ -88,7 +90,7 @@ namespace fr34kyn01535.Uconomy
         private void Events_OnPlayerConnected(UnturnedPlayer player)
         {
             //setup account
-            Database.CheckSetupAccount(player.CSteamID);
+            Database.CheckSetupAccount(player.CSteamID, player.Experience);
         }
 
         private void OnExperienceChanged(PlayerSkills arg1, uint arg2)

@@ -85,5 +85,23 @@ namespace fr34kyn01535.Uconomy
 
             bal.SetExperience(id);
         }
+
+        public void CheckSetupAccount(CSteamID id, uint experience)
+        {
+            PlayerBalance bal = GetPlayerBalance(id.ToString());
+            if (bal == null)
+            {
+                decimal balance = experience <= 0 ? pluginInstance.Configuration.Instance.InitialBalance : experience;
+                bal = new PlayerBalance()
+                {
+                    SteamID = id.ToString(),
+                    Balance = balance,
+                    LastUpdate = DateTime.Now
+                };
+                data.Add(bal);
+            }
+
+            bal.SetExperience(id);
+        }
     }
 }
