@@ -50,7 +50,12 @@ namespace fr34kyn01535.Uconomy
         public decimal GetBalance(string id)
         {
             PlayerBalance bal = GetPlayerBalance(id);
-            return bal?.Balance ?? 0;
+
+            decimal balance = bal?.Balance ?? 0;
+
+            pluginInstance.OnBalanceChecked(id, balance);
+
+            return balance;
         }
 
         /// <summary>
@@ -65,6 +70,8 @@ namespace fr34kyn01535.Uconomy
             bal.IncreaseBalance(increaseBy);
 
             bal.SetExperience(new CSteamID(ulong.Parse(id)));
+
+            pluginInstance.BalanceUpdated(id, increaseBy);
             
             return bal.Experience;
         }
