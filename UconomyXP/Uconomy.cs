@@ -15,8 +15,6 @@ namespace fr34kyn01535.Uconomy
         public DatabaseManager Database;
         public static Uconomy Instance;
 
-        public const string Version = "1.4.0";
-
         protected override void Load()
         {
             Instance = this;
@@ -26,7 +24,7 @@ namespace fr34kyn01535.Uconomy
             SaveManager.onPostSave += Database.SaveData;
             PlayerSkills.OnExperienceChanged_Global += OnExperienceChanged;
 
-            Logger.Log($"UconomyXP {Version} has been loaded!", ConsoleColor.Yellow);
+            Logger.Log($"UconomyXP has been loaded!", ConsoleColor.Yellow);
         }
 
         protected override void Unload()
