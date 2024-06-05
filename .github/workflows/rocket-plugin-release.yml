@@ -9,3 +9,5 @@ on:
 jobs:
   call-rocket-plugin-release:
     uses: RestoreMonarchyPlugins/github-actions/.github/workflows/rocket-plugin-release.yml@master
+    with:
+      plugin_file_name: "Uconomy.dll"
