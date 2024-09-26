@@ -1,5 +1,5 @@
 # Uconomy XP
-Saves player experience to a json file and works as Uconomy.
+Saves players experience to a json file and works as Uconomy.
 
 ## Information
 * Plugin file name is `Uconomy.dll` and data is stored in `Rocket/Plugins/Uconomy/` directory
