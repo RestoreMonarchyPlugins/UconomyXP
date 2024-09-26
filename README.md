@@ -1,10 +1,9 @@
 # Uconomy XP
-Synchronize player experience with Uconomy balance.
+Saves player experience to a json file and works as Uconomy.
 
 ## Information
 * Plugin file name is `Uconomy.dll` and data is stored in `Rocket/Plugins/Uconomy/` directory
-* Synchronizes players experience with the uconomy balance
-* JSON file database
+* Stores players experience in balances.json file, so they can be paid while they are offline
 * Balances cannot be shared across the servers
 * Works for all plugins that reference original Uconomy plugin  
 
