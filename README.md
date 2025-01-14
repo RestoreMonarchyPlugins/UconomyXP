@@ -1,12 +1,23 @@
 # Uconomy XP
-Works as Uconomy, but with experience, saving it to a json file.
+Synchronizes player experience with Uconomy balance and works with all Uconomy-dependent plugins.
 
-## Information
-* Plugin file name is `Uconomy.dll` and data is stored in `Rocket/Plugins/Uconomy/` directory
-* Doesn't use MySQL database
-* Stores players experience in balances.json file, so they can be paid while they are offline
-* Balances cannot be shared across the servers
-* Works for all plugins that reference original Uconomy plugin  
+## Features
+* Seamless experience-to-balance synchronization
+* Local JSON database storage (balances.json)
+* Drop-in replacement for Uconomy (Uconomy.dll)
+* Zero-configuration setup
+* Safe for existing servers that use experience as currency as it will not reset player balances
+
+## Important Notes
+* File name is Uconomy.dll but loads as UconomyXP in server logs
+* Data location: `Rocket/Plugins/Uconomy/`
+* Single-server usage only (no cross-server sync)
+* Compatible with all plugins that require original Uconomy
+* Cannot be used alongside original Uconomy plugin
+* Cannot copy balances from original Uconomy plugin
+
+> **💡 PRO TIP**
+> Looking to share balances across multiple servers or use a separate currency system? Check out the original [Uconomy](https://restoremonarchy.com/servers/plugins/uconomy) plugin with MySQL support.
 
 ## Configuration
 ```xml
@@ -24,6 +35,7 @@ Works as Uconomy, but with experience, saving it to a json file.
 </UconomyConfiguration>
 ```
 
+## Translations
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Translations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
