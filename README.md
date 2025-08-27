@@ -31,6 +31,7 @@ Synchronizes player experience with Uconomy balance and works with all Uconomy-d
   <DatabaseTableName>uconomy</DatabaseTableName>
   <DatabasePort>3306</DatabasePort>
   <InitialBalance>30</InitialBalance>
+  <MoneySymbol>$</MoneySymbol>
   <MoneyName>Credits</MoneyName>
 </UconomyConfiguration>
 ```
