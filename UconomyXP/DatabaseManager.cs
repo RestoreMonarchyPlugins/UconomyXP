@@ -71,10 +71,9 @@ namespace fr34kyn01535.Uconomy
             PlayerBalance bal = GetPlayerBalance(id);
             bal.IncreaseBalance(increaseBy);
 
-            bal.SetExperience(new CSteamID(ulong.Parse(id)));
-
             ThreadHelper.RunSynchronously(() =>
             {
+                bal.SetExperience(new CSteamID(ulong.Parse(id)));
                 pluginInstance.BalanceUpdated(id, increaseBy);
             });            
             
@@ -95,7 +94,10 @@ namespace fr34kyn01535.Uconomy
                 data.Add(bal);
             }
 
-            bal.SetExperience(id);
+            ThreadHelper.RunSynchronously(() =>
+            {
+                bal.SetExperience(id);
+            });            
         }
 
         public void CheckSetupAccount(CSteamID id, uint experience)
@@ -113,7 +115,10 @@ namespace fr34kyn01535.Uconomy
                 data.Add(bal);
             }
 
-            bal.SetExperience(id);
+            ThreadHelper.RunSynchronously(() =>
+            {
+                bal.SetExperience(id);
+            });
         }
     }
 }
