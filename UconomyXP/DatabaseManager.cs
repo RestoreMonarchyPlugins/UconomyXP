@@ -1,7 +1,6 @@
-﻿using fr34kyn01535.Uconomy.Models;
+﻿using fr34kyn01535.Uconomy.Helpers;
+using fr34kyn01535.Uconomy.Models;
 using fr34kyn01535.Uconomy.Storage;
-using Rocket.Core.Logging;
-using SDG.Unturned;
 using Steamworks;
 using System;
 using System.Collections.Generic;
@@ -53,7 +52,10 @@ namespace fr34kyn01535.Uconomy
 
             decimal balance = bal?.Balance ?? 0;
 
-            pluginInstance.OnBalanceChecked(id, balance);
+            ThreadHelper.RunSynchronously(() =>
+            {
+                pluginInstance.OnBalanceChecked(id, balance);
+            });            
 
             return balance;
         }
@@ -71,7 +73,10 @@ namespace fr34kyn01535.Uconomy
 
             bal.SetExperience(new CSteamID(ulong.Parse(id)));
 
-            pluginInstance.BalanceUpdated(id, increaseBy);
+            ThreadHelper.RunSynchronously(() =>
+            {
+                pluginInstance.BalanceUpdated(id, increaseBy);
+            });            
             
             return bal.Experience;
         }
